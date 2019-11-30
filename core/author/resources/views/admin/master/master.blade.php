@@ -23,7 +23,7 @@
   <link href="css/style.css" rel="stylesheet">
   <link href="css/style-responsive.css" rel="stylesheet">
   <script src="lib/chart-master/Chart.js"></script>
-  
+  @yield('css')
   <!-- =======================================================
     Template Name: Dashio
     Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
@@ -280,6 +280,7 @@
                 </a>
               <ul class="sub">
                 <li><a href="/admin/role">Danh sách</a></li>
+                <li><a href="/admin/options">Thiết Menu</a></li>
               </ul>
             </li>
         </ul>
@@ -384,6 +385,7 @@
       console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
     }
   </script>
+  @yield('script')
 </body>
 
 </html>
