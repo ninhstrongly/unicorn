@@ -1,0 +1,30 @@
+{
+    "name": "unicorn/author",
+    "description": "Authorize",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "PC-Unicorn",
+            "email": "ninhstrongly@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+          "Unicorn\\Author\\": "src/"
+        }
+        
+      },
+      "config": {
+        "sort-packages": true
+      },
+      "extra": {
+          "laravel": {
+            "providers": [
+              "Unicorn\\Author\\Providers\\AuthorServiceProvider"
+            ]
+          }
+        }
+}
