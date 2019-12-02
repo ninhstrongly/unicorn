@@ -281,6 +281,7 @@
               <ul class="sub">
                 <li><a href="/admin/role">Danh sách</a></li>
                 <li><a href="/admin/options">Thiết Menu</a></li>
+                <li><a href="/admin/category">Danh Mục</a></li>
               </ul>
             </li>
         </ul>
