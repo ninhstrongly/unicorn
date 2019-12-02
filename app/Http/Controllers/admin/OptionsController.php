@@ -12,7 +12,7 @@ class OptionsController extends Controller
     public function getMenu()
     {
         $options = Options::where('key', '=', 'menu')->first();
-       
+
         if (!empty($options->value)) {
         $json = json_decode($options->value);
         

@@ -16,4 +16,13 @@ Route::group(['prefix' => 'admin','namespace'=>'admin'], function () {
         Route::post('/','OptionsController@postMenu');
         route::post('update','OptionsController@postUpdateMenu')->name('update.menu');
     });
+    Route::group(['prefix' => 'category'], function () {
+        Route::get('','CategoryController@getCategory');
+        Route::post('','CategoryController@postCategory');
+
+        Route::get('edit/{id}','CategoryController@getedit');
+        Route::post('edit/{id}','CategoryController@postedit');
+
+        Route::get('del/{id}','CategoryController@getdel');
+    });
 });
