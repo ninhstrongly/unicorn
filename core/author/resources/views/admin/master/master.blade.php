@@ -248,7 +248,7 @@
           <p class="centered"><a href="profile"><img src="img/7.png" class="img-circle" width="80"></a></p>
           <h5 class="centered">Unicorn</h5>
           <li class="mt">
-            <a class="active" href="index">
+            <a class="active" href="home">
               <i class="fa fa-dashboard"></i>
               <span>Dashboard</span>
               </a>
@@ -282,6 +282,26 @@
                 <li><a href="/admin/role">Danh sách</a></li>
                 <li><a href="/admin/options">Thiết Menu</a></li>
                 <li><a href="/admin/category">Danh Mục</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <a href="javascript:;">
+                <i class="fa fa-desktop"></i>
+                <span>Sản phẩm</span>
+                </a>
+              <ul class="sub">
+                <li><a href="/admin/product">Danh sách</a></li>
+                <li><a href="/admin/product/list-attr">Danh sách thuộc tính</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <a href="javascript:;">
+                <i class="fa fa-desktop"></i>
+                <span>Đơn hàng</span>
+                </a>
+              <ul class="sub">
+                <li><a href="#">Danh sách</a></li>
+                <li><a href="#">Thêm mới</a></li>
               </ul>
             </li>
         </ul>
@@ -324,6 +344,8 @@
   <!--script for this page-->
   <script src="lib/sparkline-chart.js"></script>
   <script src="lib/zabuto_calendar.js"></script>
+  <script src="/admin/ckeditor/ckeditor.js"></script>
+  <script src="/admin/ckfinder/ckfinder.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {
       var unique_id = $.gritter.add({

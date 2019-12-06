@@ -31,4 +31,3 @@ Route::group(['prefix' => 'login','namespace'=>'admin'], function () {
     Route::get('', 'LoginuserController@getLogin');
     Route::post('','LoginuserController@postLogin');
 });
-

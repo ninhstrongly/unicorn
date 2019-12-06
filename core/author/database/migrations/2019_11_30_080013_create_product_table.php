@@ -20,7 +20,6 @@ class CreateProductTable extends Migration
             $table->tinyInteger('featured')->unsigned();
             $table->tinyInteger('state')->unsigned();
             $table->text('describe')->nullable();
-            $table->string('img');
             $table->integer('category_id')->unsigned();
             $table->timestamps();
         });
