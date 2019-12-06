@@ -12,6 +12,9 @@ class LoginCoreController extends Controller
 {
     public function getLogin()
     {
+        if (Auth::check()) {
+            return redirect('admin/home');
+        }
         return view('author::login.login');
     }
     public function postLogin(Request $rq)
@@ -20,6 +23,15 @@ class LoginCoreController extends Controller
             return redirect('admin/home');
         }else{
            return redirect()->back()->withInput();
+        }
+    }
+    public function getLogout()
+    {
+        $logout = Auth::logout();
+        if ($logout == null) {
+            return redirect('login');
+        }else{
+            return redirect()->back()->withInput();
         }
     }
 }
