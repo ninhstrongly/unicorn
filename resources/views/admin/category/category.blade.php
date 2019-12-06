@@ -44,8 +44,6 @@
                   <div class="dd list-menu" id="nestable">
                         {{ ShowCategory($category,0,"") }}
                   </div>
-                  
-                  
                 <!-- /form-panel -->
             </div>
             <!-- /col-lg-12 -->

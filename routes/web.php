@@ -25,4 +25,10 @@ Route::group(['prefix' => 'admin','namespace'=>'admin'], function () {
 
         Route::get('del/{id}','CategoryController@getdel');
     });
+    
 });
+Route::group(['prefix' => 'login','namespace'=>'admin'], function () {
+    Route::get('', 'LoginuserController@getLogin');
+    Route::post('','LoginuserController@postLogin');
+});
+

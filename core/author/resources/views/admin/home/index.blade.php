@@ -1,5 +1,6 @@
 @extends('author::admin.master.master')
 @section('content')
+
 <section id="main-content">
     <section class="wrapper">
         <div class="row">
