@@ -33,6 +33,7 @@
 </head>
 
 <body>
+  
   <section id="container">
     <!-- **********************************************************************************************************************************************************
         TOP BAR CONTENT & NOTIFICATIONS
@@ -232,7 +233,7 @@
       </div>
       <div class="top-menu">
         <ul class="nav pull-right top-menu">
-          <li><a class="logout" href="login">Logout</a></li>
+          <li><a class="logout" href="{{ asset('logout') }}">Logout</a></li>
         </ul>
       </div>
     </header>
@@ -280,6 +281,7 @@
                 </a>
               <ul class="sub">
                 <li><a href="/admin/role">Danh sách</a></li>
+                <li><a href="/admin/options">Thiết Menu</a></li>
               </ul>
             </li>
             <li class="sub-menu">
