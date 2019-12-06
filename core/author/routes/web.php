@@ -1,15 +1,26 @@
 <?php
-//======================>LOGIN ADMIN<==========================
-Route::group(['prefix' => 'admin/login'], function () {
-    Route::group(['namespace' => '\Unicorn\Author\Http\Controllers'], function () {
-        Route::get('', 'LoginCoreController@getLogin')->name('admin.login');
-        Route::post('','LoginCoreController@postLogin')->name('post.login');
+
+// //======================>LOGIN ADMIN<==========================
+// Route::group(['prefix' => 'login'], function () {
+//     Route::group(['namespace' => '\Unicorn\Author\Http\Controllers'], function () {
+//         Route::get('', 'LoginCoreController@getLogin')->name('admin.login');
+//         Route::post('','LoginCoreController@postLogin')->name('post.login');
+//     });
+// });
+
+Route::group(['middleware' => ['web', 'auth']], function(){
+    
+    Route::group(['prefix' => 'login'], function () {
+        Route::group(['namespace' => '\Unicorn\Author\Http\Controllers'], function () {
+            Route::get('', 'logincorecontroller@getlogin')->name('admin.login');
+            route::post('','logincorecontroller@postlogin')->name('post.login');
+        });
     });
-});
-//============================>ADMIN<=======================================
-Route::group(['prefix' => 'admin'], function () {
-    Route::group(['namespace' => '\Unicorn\Author\Http\Controllers'], function () {
-        Route::get('home', 'IndexController@getIndex');
+
+    Route::group(['prefix' => 'admin'], function () {
+        Route::group(['namespace' => '\Unicorn\Author\Http\Controllers'], function () {
+            Route::get('home', 'IndexController@getIndex');
+        });
     });
     //====================> Users <============================
     Route::group(['prefix' => 'users'], function () {
@@ -26,7 +37,7 @@ Route::group(['prefix' => 'admin'], function () {
     
             Route::get('logout','UserController@getLogout' );
         });
-    }); 
+    });
     //====================> Role <============================
     Route::group(['prefix' => 'role'], function () {
         Route::group(['namespace' => 'Unicorn\Author\Http\Controllers'], function () {
@@ -85,8 +96,6 @@ Route::group(['prefix' => 'admin'], function () {
         });
     });
 });
-
-
 
 
 

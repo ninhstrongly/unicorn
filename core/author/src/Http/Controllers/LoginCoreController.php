@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Unicorn\Author\Models\Users;
 use DB;
+use Validator;
 
 
 class LoginCoreController extends Controller
@@ -13,14 +14,12 @@ class LoginCoreController extends Controller
     {
         return view('author::login.login');
     }
-    public function postLogin(Request $r)
+    public function postLogin(Request $rq)
     {
-        $credentials = $r->only('email', 'password');
-
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt(['email' => $rq->email, 'password'=>$rq->password],true)) {
             return redirect('admin/home');
         }else{
-            return redirect()->back();
+           return redirect()->back()->withInput();
         }
     }
 }
