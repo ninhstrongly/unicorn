@@ -5,7 +5,6 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Options;
-use Auth;   
 class OptionsController extends Controller
 {
     //
@@ -13,7 +12,6 @@ class OptionsController extends Controller
     public function getMenu()
     {
         $options = Options::where('key', '=', 'menu')->first();
-       
         if (!empty($options->value)) {
         $json = json_decode($options->value);
         
@@ -73,16 +71,5 @@ class OptionsController extends Controller
     $options->save();   
     return redirect()->back()->with('update-menu-success', 'Thêm menu thành công!');
     }
-    public function getLogin()
-    {
-        return view('login');
-    }
-    public function postLogin(Request $rq)
-    {
-        if (Auth::attempt(['email' => $rq->email, 'password'=>$rq->password],true)) {
-            return redirect('admin/home');
-        }else{
-           return redirect()->back()->withInput();
-        }
-    }
+
 }

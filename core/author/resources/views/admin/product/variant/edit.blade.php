@@ -11,49 +11,121 @@
                     <div class="panel panel-blue">
                         <div class="panel-body">
                             <div class="panel-body" align='center'>
-                                <table class="panel-body">
-                                    <thead>
-                                        <tr>
-                                            <th width='33%'>Biến thể</th>
-                                            <th width='33%'>Giá (có thể trống)</th>
-                                            <th width='33%'>Tuỳ chọn</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($data->variant as $var)
-                                        <tr>
-                                            <td scope="row">
-                                                @foreach ($var->values as $value)
-                                                {{ $value->attribute->name }}:{{ $value->value }},
-                                                @endforeach
-                                            </td>
-                                            <td>
-                                                <div class="form-group">
-                                                    <input value="{{ $var->price }}" name="variant[{{ $var->id }}]" class="form-control"
-                                                        placeholder="Giá cho biến thể" value="">
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <a id="" class="btn btn-warning"
-                                                    href="/admin/product/del-variant/{{ $var->id }}"
-                                                    role="button">Xoá</a>
-                                            </td>
+                                @foreach ($data->variant as $var)
+                                <div class="form-group">
+                                    @foreach ($var->values as $key=>$value)
+                                    <label for=""
+                                        class="text-left col-md-1">{{ $value->attribute->name }}:{{ $value->value }}</label>
+                                    @endforeach
 
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                    <div class="col-md-9">
+                                        <input value="{{ $var->price }}" name="variant[{{ $var->id }}]"
+                                            class="form-control" placeholder="Giá cho biến thể" value="">
+                                    </div>
+                                    <div class="col-md-1">
+                                        <a id="" class="btn btn-warning"
+                                            href="/admin/product/del-variant/{{ $var->id }}">Xoá</a>
+                                    </div>
 
+                                </div>
+                                <div class="form-group imgs col-md-12 text-left require" style="margin-top: 20px;">
+                                    <div class="form-group">
+                                        <input type="button" class="btn btn-info" id="add" name="action"
+                                            value="Chọn ảnh">
+                                        <input type="hidden" name="list_img[]" id="list-img" value='{{ $var->img }}'>
+                                    </div>
+                                    <div class="col-sm-12 text-center" id="img-cat">
+                                    @if (!empty($var->img))
+                                    @php
+                                    $json = json_decode($var->img);
+                                    @endphp
+                                    @foreach ($json as $item)
+                                    <div class='single-img' style='float:left; position: relative;margin-right:10px'>
+                                        <i style="position: absolute;top:0;right:0;color:red" class='fa fa-remove delete-img' data-url='{{ $item }}'></i>
+                                        <img alt='' src='{{ $item }}' class='img-cat' width='200' height='200' />
+                                    </div>
+                                    @endforeach
+                                    @endif
+                                    </div>
+                                </div>
+                                @endforeach
+                                <hr>
+                            </div>
+                            <div><button class="btn btn-success" type="submit">Thêm</button></div>
                         </div>
-                        <div><button class="btn btn-success" type="submit">Thêm</button></div>
                     </div>
                 </div>
-        </div>
-        </form>
-        <!-- /col-lg-12 -->
+            </form>
+            <!-- /col-lg-12 -->
         </div>
         <!-- /row -->
     </section>
     <!-- /wrapper -->
 </section>
 @stop
+@section('script')
+<script>
+    jQuery('body').on('click', '#add', function () {
+        // var arr_url =($('#list-img').val()=='')?[]:($('#list-img').val());
+        var t = $(this);
+        var arr_url = (t.closest('.imgs').find('#list-img').val() == '') ? [] : (t.closest('.imgs')
+            .find('#list-img').val());
+
+        if (typeof (arr_url) == 'string') {
+            //console.log(arr_url);
+            arr_url = arr_url.replace(/\[/g, '');
+            arr_url = arr_url.replace(/\]/g, '');
+            arr_url = arr_url.replace(/"/g, '');
+            arr_url = (arr_url == '') ? [] : arr_url.split(",");
+            //arr_url = arr_url.split(",");
+        }
+        CKFinder.popup({
+            resourceType: "Images",
+            chooseFiles: true,
+            onInit: function (finder) {
+                finder.on('files:choose', function (evt) {
+                    //var arr_url = [];
+                    var mul = evt.data.files;
+
+                    mul = Object.entries(mul);
+                    mul = mul[1];
+                    mul = mul[1];
+
+                    var list_img = '';
+                    //console.log(mul);
+                    for (var i = mul.length - 1; i >= 0; i--) {
+                        arr_url.push(mul[i].getUrl());
+                        list_img = list_img +
+                            "<div class='single-img' style='float:left; position: relative;margin-right:10px'><i style='position: absolute;top:0;right:0;color:red'  class='fa fa-remove delete-img' data-url='" +
+                            mul[i].getUrl() + "'></i><img alt='' src='" + mul[i].getUrl() +
+                            "' class='img-cat' width='200' height='200'/></div>";
+                    }
+                    arr_url = JSON.stringify(arr_url);
+
+                    t.closest('.imgs').find('#list-img').eq(0).val(arr_url);
+                    t.closest('.imgs').find('#img-cat').eq(0).append(list_img);
+                });
+            }
+        });
+    });
+    $('body').on('click', '.delete-img', function () {
+            var image = $(this).data('url');
+            
+            var string = $(this).closest('.require').find('#list-img').val();
+           
+            var string_arr = JSON.parse(string);
+            console.log(string_arr);
+
+            string_arr = jQuery.grep(string_arr, function (value) {
+                return value !== image;
+            });
+            console.log(string_arr);
+
+            var final_string = JSON.stringify(string_arr);
+
+            $(this).closest('.imgs').find('#list-img').val(final_string);
+            $(this).parent().remove();
+        });
+
+</script>
+@endsection

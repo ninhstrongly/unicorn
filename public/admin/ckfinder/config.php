@@ -66,8 +66,8 @@ $config['images'] = array(
 $config['backends'][] = array(
     'name' => 'default',
     'adapter' => 'local',
-    //'baseUrl' => 'https://' . $_SERVER['HTTP_HOST'] . '/uploads/',
-    'baseUrl' => 'http://localhost:8000/uploads/img/',
+    'baseUrl' => 'http://' . $_SERVER['HTTP_HOST'] . '/uploads/img/',
+    // 'baseUrl' => 'http://localhost:8000/uploads/img/',
     
 //  'root'         => '', // Can be used to explicitly set the CKFinder user files directory.
     'chmodFiles' => 0777,

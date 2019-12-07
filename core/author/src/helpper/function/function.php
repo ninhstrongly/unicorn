@@ -6,9 +6,9 @@ function showError($errors,$nameInput){
         echo '</div>';
  }
 }
-function GetCategory($category,$parent,$shift,$id_select){
+function GetCategory($category,$parent_id,$shift,$id_select){
 	foreach($category as $value){
-	if($value['parent'] == $parent){
+	if($value['parent_id'] == $parent_id){
 		
 		if($value['id'] == $id_select){
 			echo '<option value='.$value['id'].' selected>'.$shift.$value['name'].'</option>';
@@ -21,31 +21,37 @@ function GetCategory($category,$parent,$shift,$id_select){
 		}
 	}
 }
-function ShowCategory($category,$parent,$shift){
-	foreach($category as $value){
-	if($value['parent'] == $parent){
-        echo '
-        <div class="item-menu"><span>'.$shift.$value['name'].'</span>
-        <div class="category-fix">
-            <a class="btn-category btn-primary" href="/admin/category/edit/'.$value['id'].'"><i class="fa fa-edit"></i></a>
-            <a class="btn-category btn-danger" href="/admin/category/del/'.$value['id'].'"><i class="fas fa-times"></i></i></a>
-        </div>
-        </div>';
-		ShowCategory($category,$value['id'],$shift."----|");
-		}
-	}
+function ShowCategory($category, $parent, $shift)
+{
+    foreach ($category as $value) {
+        if ($value['parent_id'] == $parent) {
+            echo '
+        <tr>
+            <td>'.$shift.$value['name'].'</td>
+                <td>
+                <a href="/admin/category/edit/'.$value['id'].'" class="btn btn-warning" >Edit</a>
+                <a href="/admin/category/del/'.$value['id'].'" class="btn btn-danger" role="button">Del</a>
+                </td>
+            </td>
+        </tr>';
+            ShowCategory($category, $value['id'], $shift.'----|');
+        }
+    }
 }
 //
-function GetLevel($category,$parent,$count){
-	foreach($category as $value){
-		if($value['id'] == $parent){
-			$count++;
-				if($value['parent'] == 0){
-					return $count;	
-				}
-				return GetLevel($category,$value['parent'],$count);
-					
-				
+function getLevel($danhMuc,$idCha,$cap)
+{
+	foreach($danhMuc as $banGhi)
+	{
+		if($banGhi['id']==$idCha)
+		{
+			$cap++;
+
+			if($banGhi['parent']==0)
+			{
+				return $cap;
+			}
+			return getLevel($danhMuc,$banGhi['parent'],$cap);
 		}
 	}
 }
@@ -92,4 +98,6 @@ function check_var($product,$array)
 	}
 	return true;
 }
+
+
 ?>
