@@ -14,29 +14,24 @@ use Illuminate\Support\Facades\Auth;
 Route::group(['prefix' => 'admin','namespace'=>'admin','middleware'=>'CheckLogin'], function () {
 
     Route::group(['prefix' => 'options'], function () {
-        Route::get('/','OptionsController@getMenu')->name('options');
-        Route::post('/','OptionsController@postMenu');
-        route::post('update','OptionsController@postUpdateMenu')->name('update.menu');
+        Route::group(['prefix' => 'menu'], function () {
+            Route::get('/','OptionsController@getMenu')->name('options');
+            Route::post('/','OptionsController@postMenu');
+            route::post('update','OptionsController@postUpdateMenu')->name('update.menu');
+        });
     });
-
     Route::group(['prefix' => 'category'], function () {
-        Route::get('','CategoryController@getCategory');
-        Route::post('','CategoryController@postCategory');
-
-        Route::get('edit/{id}','CategoryController@getedit');
-        Route::post('edit/{id}','CategoryController@postedit');
-
-        Route::get('del/{id}','CategoryController@getdel');
+        Route::get('/','CategoryController@getAdd');
+        Route::post('/','CategoryController@postAdd');
+        Route::get('edit/{id}','CategoryController@getEdit');
+        Route::post('edit/{id}','CategoryController@postEdit');
+        Route::get('del/{id}','CategoryController@getDel');
     });
-    
 });
 
-
-Route::group(['prefix' => ''], function () {
-    Route::group(['namespace' => '\Unicorn\Author\Http\Controllers'], function () {
-        Route::get('login', 'logincorecontroller@getlogin')->name('admin.login');
-        Route::post('login','logincorecontroller@postlogin')->name('post.login');
-        Route::get('logout','logincorecontroller@getLogout');
-    });
-
+Route::group(['namespace' => '\Unicorn\Author\Http\Controllers'], function () {
+    Route::get('login', 'LoginCoreController@getlogin');
+    Route::post('login','LoginCoreController@postlogin');
+    Route::get('logout','LoginCoreController@getLogout');
 });
+

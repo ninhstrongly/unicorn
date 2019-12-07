@@ -6,44 +6,42 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 
-
 class CategoryController extends Controller
 {
-    //
-    public function getCategory()
+    public function getAdd()
     {
-        $data['category']=Category::all()->toarray();
-        return view('admin.category.category',$data);
+        $db = Category::all()->toarray();
+        return view('admin.category.add',compact('db'));
     }
-    public function postCategory(Request $r){
-        $categories=Category::all()->toArray();
-        if(getLevel($categories, $r->parent_id, 1)<3){
-            $category = new Category;
-            $category->name =$r->name;
-            $category->slug=Str::slug($r->name,'-');
-            $category->parent_id=$r->parent;
-            $category->save();
-            return redirect()->back();
-        }else {
-            return redirect()->back()->withErrors(['name'=>'Trang web không hỗ trợ danh mục > 2 cấp']);
-        }
-    }
-    public function getedit($id)
+    public function postAdd(Request $r)
     {
-        $data['category']=Category::all()->toarray();
-        $data['cate']=Category::findOrFail($id);
-        return view('admin.category.edit',$data);
+        $db = new Category;
+        $db->name = $r->name;
+        $db->slug = $r->slug;
+        $db->parent_id = $r->parent_id;
+        $db->save();
+        return redirect()->back()->with('add_success','Thêm danh mục thành công');
     }
-    public function postedit(Request $r,$id){
-        $category = Category::findOrFail($id);
-        $category->name =$r->name;
-        $category->slug=Str::slug($r->name,'-');
-        $category->parent_id=$r->parent;
-        $category->save();
-        return redirect()->back();
+
+    public function getEdit($id){
+        $db['category'] = Category::find($id);
+        
+        $db['categorys'] = Category::all()->toarray();
+       
+        return view('admin.category.edit',$db);
     }
-    public function getdel($id){
-        Category::destroy($id);
-        return redirect()->back();
+    public function postEdit($id,Request $r){
+        $db = Category::find($id);
+        $db->name = $r->name;
+        $db->slug = $r->slug;
+        $db->parent_id = $r->parent_id;
+        $db->save();
+        return redirect('admin/category/')->with('edit_success','Sửa danh mục thành công');
+    }
+
+    public function getDel($id)
+    {
+        $db = Category::find($id)->delete();
+        return redirect('admin/category/')->with('del_success','Xóa danh mục thành công');
     }
 }

@@ -21,18 +21,22 @@ function GetCategory($category,$parent_id,$shift,$id_select){
 		}
 	}
 }
-function ShowCategory($category,$parent_id,$shift){
-	foreach($category as $value){
-	if($value['parent_id'] == $parent_id){
-		echo '
-		<ol class="dd-list">
-		<li class="dd-item" data-link="" data-name="' .$shift.$value['name']. '">
-		<div class="dd-handle" style="padding:6px 50px;">' .$shift.$value['name']. '</div>
-		<div class="menu-actions"><a href="/admin/category/edit/'.$value['id']. '" class="edit-menu modal-with-form"><i class="fa fa-edit"></i></a><a href="/admin/category/del/'.$value['id']. '" class="remove-menu"><i id="rmv-menu" class="fa fa-times"></i></a></div></li>
-		</ol>';
-		ShowCategory($category,$value['id'],$shift."----|");
-		}
-	}
+function ShowCategory($category, $parent, $shift)
+{
+    foreach ($category as $value) {
+        if ($value['parent_id'] == $parent) {
+            echo '
+        <tr>
+            <td>'.$shift.$value['name'].'</td>
+                <td>
+                <a href="/admin/category/edit/'.$value['id'].'" class="btn btn-warning" >Edit</a>
+                <a href="/admin/category/del/'.$value['id'].'" class="btn btn-danger" role="button">Del</a>
+                </td>
+            </td>
+        </tr>';
+            ShowCategory($category, $value['id'], $shift.'----|');
+        }
+    }
 }
 //
 function getLevel($danhMuc,$idCha,$cap)
@@ -41,20 +45,15 @@ function getLevel($danhMuc,$idCha,$cap)
 	{
 		if($banGhi['id']==$idCha)
 		{
-
 			$cap++;
 
 			if($banGhi['parent']==0)
 			{
 				return $cap;
 			}
-
 			return getLevel($danhMuc,$banGhi['parent'],$cap);
-
 		}
-
 	}
-
 }
 //get_variant gộp các biến thể lại
 function get_combinations($arrays) {
@@ -99,4 +98,6 @@ function check_var($product,$array)
 	}
 	return true;
 }
+
+
 ?>

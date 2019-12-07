@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Unicorn\Author\Models\{Users,Attribute,Values,Product,Variant,Variant_values};
+use App\Models\Category;
 use DB;
 
 
@@ -16,19 +17,23 @@ class ProductController extends Controller
     }
     public function getAdd()
     {
+        $db = Category::all()->toarray();
         $attr = Attribute::all();
-        return view('author::admin.product.add',compact('attr'));
+        return view('author::admin.product.add',compact('attr','db'));
     }
     public function postAdd(Request $r)
     {
+       
         try {
             $prd = new Product;
             $prd->name = $r->name;
+            $prd->slug = $r->slug;
             $prd->price = $r->price;
             $prd->featured = $r->featured;
             $prd->state = $r->state;
             $prd->describe = $r->describe;
-            $prd->category_id  = 1;
+            $prd->category_id  = $r->parent_id;
+            $prd->img = $r->image;
             
             $prd->save();
             
@@ -65,19 +70,22 @@ class ProductController extends Controller
     }
     public function getEdit($id)
     {
+        $db = Category::all()->toarray();
         $attr = Attribute::all();
         $product = Product::find($id);
-        return view('author::admin.product.edit',compact('attr','product'));
+        return view('author::admin.product.edit',compact('attr','product','db'));
     }
     public function postEdit(Request $r,$id)
     {
         $prd = Product::find($id);
         $prd->name = $r->name;
+        $prd->slug = $r->slug;
         $prd->price = $r->price;
         $prd->featured = $r->featured;
         $prd->state = $r->state;
         $prd->describe = $r->describe;
-        $prd->category_id = 1;
+        $prd->category_id = $r->parent_id;
+        $prd->img = $r->image;
         $prd->save();
         $mang = [];
         foreach ($r->attr as $value) {
@@ -188,11 +196,28 @@ class ProductController extends Controller
         return view('author::admin.product.variant.add',compact('data'));
     }
     public function postAddVariant(Request $r, $id)
-    {
-        
+    {   
+        $img_r = $r->list_img;
+        $var = [];
+        $ke = 0;
+        $key_ = [];
+        foreach ($r->variant as $key=>$value) {
+            $key_[] = $key;
+        }
         foreach($r->variant as $key=>$value){
-            $vari = Variant::find($key);
-            $vari->price = $value;
+            foreach ($img_r as $k=>$valu) {
+                foreach ($key_ as $keyy=>$value_) {
+                    $var[$ke]['price'] = $value;
+                    $var[$k]['img'] = $valu;
+                    $var[$keyy]['key'] = $value_;
+                }
+            }
+            $ke++;
+        }
+        foreach ($var as $value) {
+            $vari = Variant::find($value['key']);
+            $vari->price = $value['price'];
+            $vari->img = $value['img'];
             $vari->save();
         }
         return redirect('admin/product')->with('thongbao','them sp thanh cong');
@@ -204,9 +229,27 @@ class ProductController extends Controller
     }
     public function postEditVariant(Request $r,$id)
     {
+        $img_r = $r->list_img;
+        $var = [];
+        $ke = 0;
+        $key_ = [];
+        foreach ($r->variant as $key=>$value) {
+            $key_[] = $key;
+        }
         foreach($r->variant as $key=>$value){
-            $vari = Variant::find($key);
-            $vari->price = $value;
+            foreach ($img_r as $k=>$valu) {
+                foreach ($key_ as $keyy=>$value_) {
+                    $var[$ke]['price'] = $value;
+                    $var[$k]['img'] = $valu;
+                    $var[$keyy]['key'] = $value_;
+                }
+            }
+            $ke++;
+        }
+        foreach ($var as $value) {
+            $vari = Variant::find($value['key']);
+            $vari->price = $value['price'];
+            $vari->img = $value['img'];
             $vari->save();
         }
         return redirect('admin/product')->with('thongbao','them sp thanh cong');

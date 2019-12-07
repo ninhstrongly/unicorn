@@ -8,7 +8,7 @@
 //     });
 // });
 
-   
+
 Route::group(['middleware' => ['web', 'auth','CheckLogin']], function(){
 
     Route::group(['prefix' => 'admin'], function () {

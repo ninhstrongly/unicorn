@@ -18,22 +18,23 @@
                             <div class="col-lg-9">
                                 <select class="form-control" name="parent_id" id="">
                                     <option value="0">----ROOT----</option>
-                                    {{ GetCategory($categorys,0,'',$category->parent_id) }}
+                                    {{ GetCategory($db,0,'',0) }}
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Tên Danh Mục</label>
                             <div class="col-lg-9 ">
-                                <input id="inputName" type="text" placeholder="" value="{{ $category->name }}" name="name" id="l-name" class="form-control" value="" placeholder="Tên danh mục">
+                                <input  id="inputName" type="text" placeholder="" name="name" id="l-name" class="form-control" value="" placeholder="Tên danh mục">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Đường dẫn</label>
                             <div class="col-lg-9 ">
-                                <input id="inputSlug" name="slug" type="text" placeholder="" value="{{ $category->slug }}" name="name" id="l-name" class="form-control" value="" placeholder="Đường dẫn">
+                                <input id="inputSlug"  type="text" placeholder="" name="slug" id="l-name" class="form-control" value="" placeholder="Đường dẫn">
                             </div>
                         </div>
+                       
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-9 text-center">
                                 <button type="submit" name="sbm" id="btn-sbm" class="btn btn-theme ">Thêm</button>
@@ -56,7 +57,7 @@
                         </thead>
                         <tbody>
                            <tr>
-                            {{ ShowCategory($categorys,0,'') }}
+                            {{ ShowCategory($db,0,'') }}
                            </tr>
                         </tbody>
                     </table>
