@@ -6,9 +6,9 @@ function showError($errors,$nameInput){
         echo '</div>';
  }
 }
-function GetCategory($category,$parent,$shift,$id_select){
+function GetCategory($category,$parent_id,$shift,$id_select){
 	foreach($category as $value){
-	if($value['parent'] == $parent){
+	if($value['parent_id'] == $parent_id){
 		
 		if($value['id'] == $id_select){
 			echo '<option value='.$value['id'].' selected>'.$shift.$value['name'].'</option>';
@@ -21,33 +21,40 @@ function GetCategory($category,$parent,$shift,$id_select){
 		}
 	}
 }
-function ShowCategory($category,$parent,$shift){
+function ShowCategory($category,$parent_id,$shift){
 	foreach($category as $value){
-	if($value['parent'] == $parent){
-        echo '
-        <div class="item-menu"><span>'.$shift.$value['name'].'</span>
-        <div class="category-fix">
-            <a class="btn-category btn-primary" href="/admin/category/edit/'.$value['id'].'"><i class="fa fa-edit"></i></a>
-            <a class="btn-category btn-danger" href="/admin/category/del/'.$value['id'].'"><i class="fas fa-times"></i></i></a>
-        </div>
-        </div>';
+	if($value['parent_id'] == $parent_id){
+		echo '
+		<ol class="dd-list">
+		<li class="dd-item" data-link="" data-name="' .$shift.$value['name']. '">
+		<div class="dd-handle" style="padding:6px 50px;">' .$shift.$value['name']. '</div>
+		<div class="menu-actions"><a href="/admin/category/edit/'.$value['id']. '" class="edit-menu modal-with-form"><i class="fa fa-edit"></i></a><a href="/admin/category/del/'.$value['id']. '" class="remove-menu"><i id="rmv-menu" class="fa fa-times"></i></a></div></li>
+		</ol>';
 		ShowCategory($category,$value['id'],$shift."----|");
 		}
 	}
 }
 //
-function GetLevel($category,$parent,$count){
-	foreach($category as $value){
-		if($value['id'] == $parent){
-			$count++;
-				if($value['parent'] == 0){
-					return $count;	
-				}
-				return GetLevel($category,$value['parent'],$count);
-					
-				
+function getLevel($danhMuc,$idCha,$cap)
+{
+	foreach($danhMuc as $banGhi)
+	{
+		if($banGhi['id']==$idCha)
+		{
+
+			$cap++;
+
+			if($banGhi['parent']==0)
+			{
+				return $cap;
+			}
+
+			return getLevel($danhMuc,$banGhi['parent'],$cap);
+
 		}
+
 	}
+
 }
 //get_variant gộp các biến thể lại
 function get_combinations($arrays) {
