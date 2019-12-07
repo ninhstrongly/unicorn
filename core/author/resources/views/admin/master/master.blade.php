@@ -33,6 +33,7 @@
 </head>
 
 <body>
+  
   <section id="container">
     <!-- **********************************************************************************************************************************************************
         TOP BAR CONTENT & NOTIFICATIONS
@@ -43,7 +44,7 @@
         <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
       </div>
       <!--logo start-->
-      <a href="index" class="logo" style="color:black"><b>UNICORN</b></a>
+      <a href="index" class="logo" style="color:black"><b>{{ Auth::user()->name }}</b></a>
       <!--logo end-->
       <div class="nav notify-row" id="top_menu">
         <!--  notification start -->
@@ -232,7 +233,7 @@
       </div>
       <div class="top-menu">
         <ul class="nav pull-right top-menu">
-          <li><a class="logout" href="login">Logout</a></li>
+          <li><a class="logout" href="{{ asset('logout') }}">Logout</a></li>
         </ul>
       </div>
     </header>
@@ -281,7 +282,9 @@
               <ul class="sub">
                 <li><a href="/admin/role">Danh sách</a></li>
                 <li><a href="/admin/options">Thiết Menu</a></li>
+
                 <li><a href="/admin/category">Danh Mục</a></li>
+
               </ul>
             </li>
             <li class="sub-menu">
@@ -350,7 +353,7 @@
     $(document).ready(function() {
       var unique_id = $.gritter.add({
         // (string | mandatory) the heading of the notification
-        title: 'Welcome to Unicorn',
+        title: 'Welcome to <?php echo Auth::user()->name; ?>',
         // (string | mandatory) the text inside the notification
         text: 'Hello',
         // (string | optional) the image to display on the left
@@ -358,7 +361,7 @@
         // (bool | optional) if you want it to fade out on its own or just sit there
         sticky: false,
         // (int | optional) the time you want it to be alive for before fading out
-        time: 8000,
+        time: 4000,
         // (string | optional) the class name you want to apply to that specific message
         class_name: 'my-sticky-class'
       });

@@ -1,6 +1,5 @@
 @extends('author::admin.master.master')
 @section('content')
-@dd(Auth::user())
 <section id="main-content">
     <section class="wrapper">
         <div class="row">
@@ -130,9 +129,12 @@
                   <!-- WEATHER PANEL -->
                   <div class="col-md-4 mb">
                     <div class="weather pn">
-                      <i class="fa fa-cloud fa-4x"></i>
-                      <h2>11º C</h2>
-                      <h4>BUDAPEST</h4>
+                      <img src="http://openweathermap.org/img/w/{{ $weather['icon'] }}.png" alt="">
+                      <h2>{{ $weather['temp'] }}º C</h2>
+                      <h4>{{ $weather['time'] }}</h4>
+                      <h4>{{ $weather['date'] }}</h4>
+                      <h4>{{ $weather['name'] }}</h4>
+                      
                     </div>
                   </div>
                   <!-- /col-md-4-->
