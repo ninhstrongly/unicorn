@@ -121,7 +121,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row" style="margin-top: 20px;">
                                 <label for="password" class="control-label col-lg-2">Chọn ảnh đại diện</label>
                                 <div class="form-group col-md-10">
@@ -137,14 +136,13 @@
                                                     style="position: absolute;right: 0;top: 0; height: 35px">Thêm ảnh
                                                 </button>
                                             </div>
-
                                         </div>
                                         <div class="col-md-3 text-center" id="avatar">
+                                            <img src='' class='imgProduct img-thumbnail' width='200' />
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <div class="col-lg-offset-2 col-lg-10">
                                     <button class="btn btn-theme" type="submit">Thêm</button>

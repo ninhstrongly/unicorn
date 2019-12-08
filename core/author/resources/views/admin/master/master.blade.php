@@ -7,6 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Dashboard">
   <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('title')</title>
   <base href="{{asset('admin')}}/">
   <!-- Favicons -->
@@ -14,7 +15,7 @@
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Bootstrap core CSS -->
-  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link id="bootstrap" href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!--external css-->
   <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" href="css/zabuto_calendar.css">
@@ -302,6 +303,15 @@
               <ul class="sub">
                 <li><a href="#">Danh sách</a></li>
                 <li><a href="#">Thêm mới</a></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <a href="javascript:;">
+                <i class="fa fa-desktop"></i>
+                <span>Package</span>
+                </a>
+              <ul class="sub">
+                <li><a href="/admin/posts">Bài viết</a></li>
               </ul>
             </li>
         </ul>
