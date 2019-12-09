@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['namespace' => '\Unicorn\Author\Http\Controllers'], function () {
+    Route::get('login', 'LoginCoreController@getlogin');
+    Route::post('login','LoginCoreController@postlogin');
+    Route::get('logout','LoginCoreController@getLogout');
+});
 
 Route::group(['prefix' => 'admin','namespace'=>'admin','middleware'=>'CheckLogin'], function () {
 
@@ -29,9 +34,5 @@ Route::group(['prefix' => 'admin','namespace'=>'admin','middleware'=>'CheckLogin
     });
 });
 
-Route::group(['namespace' => '\Unicorn\Author\Http\Controllers'], function () {
-    Route::get('login', 'LoginCoreController@getlogin');
-    Route::post('login','LoginCoreController@postlogin');
-    Route::get('logout','LoginCoreController@getLogout');
-});
+
 

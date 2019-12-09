@@ -8,9 +8,14 @@
 //     });
 // });
 
+Route::group(['namespace' => '\Unicorn\Author\Http\Controllers'], function () {
+    Route::get('login', 'LoginCoreController@getlogin');
+    Route::post('login','LoginCoreController@postlogin');
+    Route::get('logout','LoginCoreController@getLogout');
+});
 
 Route::group(['middleware' => ['web', 'auth','CheckLogin']], function(){
-
+    
     Route::group(['prefix' => 'admin'], function () {
         //====================> Home <============================
         Route::group(['namespace' => '\Unicorn\Author\Http\Controllers'], function () {
