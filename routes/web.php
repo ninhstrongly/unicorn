@@ -32,6 +32,7 @@ Route::group(['prefix' => 'admin','namespace'=>'admin','middleware'=>'CheckLogin
         Route::post('edit/{id}','CategoryController@postEdit');
         Route::get('del/{id}','CategoryController@getDel');
     });
+    Route::resource('posts','PostsController');
 });
 
 
