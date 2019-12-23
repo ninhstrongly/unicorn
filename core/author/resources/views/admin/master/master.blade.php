@@ -324,9 +324,41 @@
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
     @yield('content')
-    
+    <script>
+        var div = document.createElement('div');
+        div.className = 'fb-customerchat';
+        div.setAttribute('page_id', '100484671452457');
+        div.setAttribute('ref', 'b64:bGl2ZS1jaGF0');
+        document.body.appendChild(div);
+        window.fbMessengerPlugins = window.fbMessengerPlugins || {
+          init: function () {
+            FB.init({
+              appId            : '1678638095724206',
+              autoLogAppEvents : true,
+              xfbml            : true,
+              version          : 'v3.3'
+            });
+          }, callable: []
+        };
+        window.fbAsyncInit = window.fbAsyncInit || function () {
+          window.fbMessengerPlugins.callable.forEach(function (item) { item(); });
+          window.fbMessengerPlugins.init();
+        };
+        setTimeout(function () {
+          (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk/xfbml.customerchat.js";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+        }, 0);
+      </script>
+    <div class="fb-customerchat" page_id="100484671452457" ref="b64:bGl2ZS1jaGF0"></div>
     <!--main content end-->
     <!--footer start-->
+    
     <footer class="site-footer">
       <div class="text-center">
         <p>
@@ -374,6 +406,11 @@
       });
 
       return false;
+     
+
+    
+
+      
     });
   </script>
   <script type="application/javascript">

@@ -18,10 +18,29 @@ class LoginCoreController extends Controller
     }
     public function postLogin(Request $rq)
     {
-        if (Auth::attempt(['email' => $rq->email, 'password'=>$rq->password],true)) {
-            return redirect('admin/home');
-        }else{
-           return redirect()->back()->withInput();
+        $validator = Validator::make($rq->all(), [
+            'email' => 'required|email',
+            'password' => 'required|min:5',
+        ],
+        [
+            'email.required'=>'Email không được để trống',
+            'email.email'=>'Email không đúng định dạng',
+            'password.required'=>'Mật khẩu không được bỏ trống',
+            'password.min'=>'Mật khẩu tối thiểu là 6 ký tự'
+        ]);
+       
+        if ($validator->passes()) {
+            if (Auth::attempt(['email' => $rq->email, 'password'=>$rq->password],true)) {
+                return redirect('admin/home');
+            }else{
+                return redirect()->back();
+            }
+        }
+        if ($validator->fails()) {
+            return response([
+                'errors' => true,
+                'msg' => $validator->errors(),
+            ]);
         }
     }
     public function getLogout()

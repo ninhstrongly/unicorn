@@ -67,7 +67,6 @@ class PostsController extends Controller
         
         return response()->json($Post);
     }
-  
     /**
      * Remove the specified resource from storage.
      *
@@ -77,7 +76,36 @@ class PostsController extends Controller
     public function destroy($id)
     {
         Post::find($id)->delete();
-     
         return response()->json(['success'=>'Xóa thành công.']);
+    }
+    public function getList()
+    {
+        dd(1);
+        $links = Post::all();
+        return view('admin.posts.post')->with('links', $links);
+    }
+    public function postAdd(Request $request)
+    {
+        $link = Post::create($request->all());
+        return Response::json($link);
+    }
+    public function getEdit($link_id)
+    {
+        $link = Post::find($link_id);
+        return Response::json($link);
+       
+    }
+    public function putEdit(Request $request, $link_id)
+    {
+        $link = Post::find($link_id);
+        $link->url = $request->url;
+        $link->description = $request->description;
+        $link->save();
+        return Response::json($link);
+    }
+    public function delete($link_id)
+    {
+        $link = Post::destroy($link_id);
+        return Response::json($link);
     }
 }
