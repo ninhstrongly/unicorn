@@ -34,7 +34,7 @@
 </head>
 
 <body>
-  
+
   <section id="container">
     <!-- **********************************************************************************************************************************************************
         TOP BAR CONTENT & NOTIFICATIONS
@@ -314,6 +314,16 @@
                 <li><a href="/admin/posts">Bài viết</a></li>
               </ul>
             </li>
+            <li class="sub-menu">
+                <a href="javascript:;">
+                  <i class="fa fa-desktop"></i>
+                  <span>Cronjob</span>
+                  </a>
+                <ul class="sub">
+                  <li><a href="/admin/setup_crontab">Danh sách</a></li>
+                  <li><a href="/admin/setup_crontab/shopee">Shopee</a></li>
+                </ul>
+              </li>
         </ul>
         <!-- sidebar menu end-->
       </div>
@@ -324,7 +334,7 @@
         *********************************************************************************************************************************************************** -->
     <!--main content start-->
     @yield('content')
-    
+
     <!--main content end-->
     <!--footer start-->
     <footer class="site-footer">

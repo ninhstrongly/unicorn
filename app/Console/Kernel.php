@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        'App\Console\Commands\Shopee\Cronjob_1'
     ];
 
     /**
@@ -24,10 +24,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        if(!empty(time_crontab('shopee'))){
+            $schedule->command('shopee:cronjob1')->cron(time_crontab('shopee'))->runInBackground()->timezone('Asia/Ho_Chi_Minh');
+        }
     }
-
     /**
      * Register the commands for the application.
      *

@@ -14,7 +14,7 @@
                     <form role="form" class="form-horizontal style-form" name="parent" method="post" id="form-btn">
                         @csrf
                         <div class="form-group">
-                            <label class="col-lg-3" for="">Danh mục cha:</label> 
+                            <label class="col-lg-3" for="">Danh mục cha:</label>
                             <div class="col-lg-9">
                                 <select class="form-control" name="parent_id" id="">
                                     <option value="0">----ROOT----</option>
@@ -34,7 +34,7 @@
                                 <input id="inputSlug"  type="text" placeholder="" name="slug" id="l-name" class="form-control" value="" placeholder="Đường dẫn">
                             </div>
                         </div>
-                       
+
                         <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-9 text-center">
                                 <button type="submit" name="sbm" id="btn-sbm" class="btn btn-theme ">Thêm</button>
@@ -47,7 +47,7 @@
             <div class="col-lg-6">
                 <h4>Danh sách Menu</h4>
                 <div class="form-panel">
-                   
+
                     <table style="height:12px;" id="myTable" class="table table-striped" >
                         <thead>
                             <tr>

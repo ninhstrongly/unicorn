@@ -1,5 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +29,24 @@ Route::group(['prefix' => 'admin','namespace'=>'admin','middleware'=>'CheckLogin
         Route::get('del/{id}','CategoryController@getDel');
     });
     Route::resource('posts','PostsController');
+
+    Route::group(['prefix' => 'setup_crontab','as'=>'setup.'], function () {
+        Route::get('', 'SetupCrontabController@index');
+        Route::get('shopee', 'SetupCrontabController@getShopee');
+        Route::post('shopee', 'SetupCrontabController@saveShopee')->name('crontab.shopee');
+        Route::post('change_status','SetupCrontabController@change_status')->name('crontab.change_status');
+
+        Route::post('run',function(Request $r){
+            if($r->check == 1){
+                Artisan::queue('schedule:run');
+            }
+        })->name('crontab.run');
+    });
+
+    Route::group(['prefix' => 'chat'], function () {
+        Route::get('', 'ChatroomController@index');
+
+    });
 });
 
 Route::group(['namespace' => '\Unicorn\Author\Http\Controllers'], function () {
@@ -35,4 +54,6 @@ Route::group(['namespace' => '\Unicorn\Author\Http\Controllers'], function () {
     Route::post('login','LoginCoreController@postlogin');
     Route::get('logout','LoginCoreController@getLogout');
 });
+
+Route::get('test','TestController@test');
 

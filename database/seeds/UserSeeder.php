@@ -12,7 +12,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            ['name'=>'Unicorn','email'=>'admin@gmail.com','password'=>bcrypt('123456'),'address'=>'Thường tín'],
+            ['name'=>'Unicorn','email'=>'ninh@gmail.com','password'=>bcrypt('1'),'address'=>'VIETNAM'],
         ]);
     }
 }
