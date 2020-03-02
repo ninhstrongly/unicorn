@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +47,11 @@ Route::group(['prefix' => 'admin','namespace'=>'admin','middleware'=>'CheckLogin
     Route::group(['prefix' => 'chat'], function () {
         Route::get('', 'ChatroomController@index');
 
+        Route::get('getUserLogin','ChatroomController@getUserLogin');
+
+        Route::get('messages', 'ChatroomController@messages');
+
+        Route::post('messages', 'ChatroomController@postMessages');
     });
 });
 
