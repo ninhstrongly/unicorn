@@ -1958,7 +1958,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    message: {
+    messages: {
       type: Object,
       "default": {}
     }
@@ -38158,17 +38158,17 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "message is-current-user" }, [
     _c("div", { staticClass: "message-item user-name" }, [
-      _vm._v("\n\t\t" + _vm._s(_vm.message.user.name) + "\n\t")
+      _vm._v("\n\t\t" + _vm._s(_vm.messages.name) + "\n\t")
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "message-item timestamp" }, [
       _vm._v(
-        "\n\t\t| " + _vm._s(_vm.message.created_at.split(" ")[1]) + ":\n\t"
+        "\n\t\t| " + _vm._s(_vm.messages.created_at.split(" ")[1]) + ":\n\t"
       )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "message-item text-message" }, [
-      _vm._v("\n\t\t" + _vm._s(_vm.message.message) + "\n\t")
+      _vm._v("\n\t\t" + _vm._s(_vm.messages.message) + "\n\t")
     ])
   ])
 }
@@ -38202,8 +38202,8 @@ var render = function() {
         _c(
           "div",
           { staticClass: "messages-content" },
-          _vm._l(_vm.list_messages, function(message, index) {
-            return _c("ChatItem", { key: index, attrs: { message: message } })
+          _vm._l(_vm.list_messages, function(messages, index) {
+            return _c("ChatItem", { key: index, attrs: { messages: messages } })
           }),
           1
         )

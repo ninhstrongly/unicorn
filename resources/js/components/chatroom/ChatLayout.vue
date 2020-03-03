@@ -6,9 +6,9 @@
             </div>
             <div class="messages">
                <div class="messages-content">
-                    <ChatItem v-for="(message, index) in list_messages" v-bind:key="index" v-bind:message="message"></ChatItem>
+                    <ChatItem v-for="(messages,index) in list_messages" v-bind:key="index" v-bind:messages="messages"></ChatItem>
                 </div>
-            </div>
+             </div>
             <div class="message-box">
                 <input type="text" v-model="message" @keyup.enter="sendMessage" class="message-input" placeholder="Type message..."/>
                 <button type="button" class="message-submit" @click="sendMessage">Send</button>
